@@ -3,7 +3,7 @@ exports.init = function( grunt ) {
 
     var exports = {};
     var path    = require( 'path' );
-    var _       = grunt.utils._;
+    var _       = grunt.utils._; // once grunt 0.4.0 is used it needs to be renamed to 'grunt.util._'
 
     // Build CSS with compass compile
     exports.optsToArgs = function( opts, done ) {
