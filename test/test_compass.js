@@ -41,7 +41,7 @@ exports[ 'compass' ] = {
             dest: 'css'
         };
 
-        test.equal( compass.buildCommand( dataSet ),
+        test.equal( compass.optsToArgs( dataSet ),
             'compass compile --sass-dir="sass" --css-dir="css"',
             'should return the correct command.' );
 
@@ -62,7 +62,7 @@ exports[ 'compass' ] = {
             dest: 'css'
         };
 
-        test.equal( compass.buildCommand( dataSet1 ),
+        test.equal( compass.optsToArgs( dataSet1 ),
             'compass compile --sass-dir="sass" --css-dir="css" test/sass/other.scss test/sass/test.scss',
             'should return the correct command.' );
 
@@ -73,7 +73,7 @@ exports[ 'compass' ] = {
             dest: 'css'
         };
 
-        test.equal( compass.buildCommand( dataSet2 ),
+        test.equal( compass.optsToArgs( dataSet2 ),
             'compass compile --sass-dir="sass" --css-dir="css" test/sass/other.scss',
             'should return the correct command.' );
 
@@ -93,7 +93,7 @@ exports[ 'compass' ] = {
             outputstyle: 'compressed'
         };
 
-        test.equal( compass.buildCommand( dataSet ),
+        test.equal( compass.optsToArgs( dataSet ),
             'compass compile --sass-dir="sass" --css-dir="css" --output-style compressed',
             'should return the correct command.' );
 
@@ -113,7 +113,7 @@ exports[ 'compass' ] = {
             linecomments: false
         };
 
-        test.equal( compass.buildCommand( dataSet ),
+        test.equal( compass.optsToArgs( dataSet ),
             'compass compile --sass-dir="sass" --css-dir="css" --no-line-comments',
             'should return the correct command.' );
 
@@ -133,7 +133,7 @@ exports[ 'compass' ] = {
             debugsass: true
         };
 
-        test.equal( compass.buildCommand( dataSet ),
+        test.equal( compass.optsToArgs( dataSet ),
             'compass compile --sass-dir="sass" --css-dir="css" --debug-info',
             'should return the correct command.' );
 
