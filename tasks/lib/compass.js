@@ -24,7 +24,7 @@ exports.init = function( grunt ) {
             }
 
             if( _.isArray( val ) ) {
-                val.forEach(function( subval ) {
+                val.forEach( function( subval ) {
                     args.push( '--' + el, subval );
                 });
             }
@@ -135,6 +135,14 @@ exports.init = function( grunt ) {
         }
 
         return command; */
+    };
+
+    exports.consolidateInput = function( opts ) {
+        // use _.map or es5 equivalent to go over the object
+        // and combine and change ie. dir options to make them
+        // command line ready.
+        // this can be calledn in optsToargs, so the function can do it's thing
+
     };
 
     // Output to the console
