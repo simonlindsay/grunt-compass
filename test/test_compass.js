@@ -1,5 +1,6 @@
 var grunt   = require( 'grunt' );
 var compass = require( '../tasks/lib/compass' ).init( grunt );
+var _       = grunt.utils._;
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -41,7 +42,7 @@ exports.compass = {
             dest: 'css'
         };
 
-        test.strictEqual( compass.optsToArgs( dataSet ), ['--sass-dir="sass"', '--css-dir="css"'], 'Should return the right arguments for the cli.' );
+        test.deepEqual( compass.optsToArgs( dataSet ), ['--sass-dir="sass"', '--css-dir="css"'], 'Should return the right arguments for the cli.' );
 
         test.done();
     }
