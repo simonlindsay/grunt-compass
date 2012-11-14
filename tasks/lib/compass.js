@@ -10,6 +10,8 @@ exports.init = function( grunt ) {
 
         var args = [];
 
+        opts = this.cleanInput( opts );
+
         Object.keys( opts ).forEach( function( el ) {
             var val = opts[ el ];
 
@@ -31,118 +33,31 @@ exports.init = function( grunt ) {
         });
 
         return args;
-
-        /* var src, dest, specify, matchedFiles;
-        var command        = "compass compile";
-        var config         = data.config;
-        var images         = data.images;
-        var fonts          = data.fonts;
-        var outputstyle    = data.outputstyle;
-        var linecomments   = data.linecomments;
-        var forcecompile   = data.forcecompile;
-        var debugsass      = data.debugsass;
-        var relativeassets = data.relativeassets;
-        var libRequire     = data.require;
-        var bundleExec     = data.bundleExec;
-        var environment    = data.environment;
-        var importPath     = data.importPath;
-
-        if ( data.src !== undefined ) {
-            src = grunt.template.process( data.src );
-        }
-
-        if ( data.dest !== undefined ) {
-            dest = grunt.template.process( data.dest );
-        }
-
-        if ( data.specify !== undefined ) {
-            specify = grunt.template.process( data.specify );
-        }
-
-        if ( bundleExec ) {
-            command = 'bundle exec ' + command;
-        }
-
-        if ( src !== undefined && dest !== undefined ) {
-            command += ' --sass-dir="' + src + '" --css-dir="' + dest + '"';
-
-            // Specify sass files to be compiled in directory `src`.
-            if ( specify !== undefined ) {
-
-                matchedFiles = grunt.file.expandFiles( specify );
-
-                if ( matchedFiles.length > 0 ) {
-                    // Add all files execept those which begin with an underscore to the `compile` command.
-                    matchedFiles.forEach( function( file ) {
-                        if ( path.basename( file ).charAt( 0 ) !== '_' ) {
-                            command += ' ' + file;
-                        }
-                    });
-                }
-                else {
-                    grunt.log.error( 'No file matched with: ' + specify );
-                    done( false );
-                }
-            }
-        }
-
-        if ( config !== undefined ) {
-            command += ' --config="' + config + '"';
-        }
-
-        if ( images !== undefined ) {
-            command += ' --images-dir="' + images + '"';
-        }
-
-        if ( fonts !== undefined ) {
-            command += ' --fonts-dir="' + fonts + '"';
-        }
-
-        if ( debugsass !== undefined ) {
-            if ( debugsass === true ) {
-                command += ' --debug-info';
-            }
-        }
-
-        if ( relativeassets !== undefined ) {
-            if ( relativeassets === true ) {
-                command += ' --relative-assets';
-            }
-        }
-
-        if ( outputstyle !== undefined ) {
-            command += ' --output-style ' + outputstyle;
-        }
-
-        if ( linecomments === false ) {
-            command += ' --no-line-comments';
-        }
-
-        if ( libRequire !== undefined ) {
-            command += ' --require '+ libRequire;
-        }
-
-        if ( forcecompile === true ) {
-            command += ' --force';
-        }
-
-        if ( environment !== undefined ) {
-            command += ' -e ' + environment;
-        }
-
-        if ( importPath !== undefined ) {
-            command += ' -I ' + importPath;
-        }
-
-        return command; */
     };
 
-    exports.consolidateInput = function( opts ) {
+    exports.cleanInput = function( opts ) {
         // use _.map or es5 equivalent to go over the object
         // and combine and change ie. dir options to make them
         // command line ready.
-        // this can be calledn in optsToargs, so the function can do it's thing
+        // this can be called in optsToargs, so the function can do it's thing
+        var arrayOfTargetKeys = [ 'src', 'dest', 'dir' ];
+        var obj = {};
 
+        Object.keys( opts ).forEach( function( el ) {
+            if ( el in opts ) {
+                if ( el === 'src' ) {
+                    obj[ 'sass-dir="' + opts[ el ] + '"' ] = true;
+                }
+                else if ( el === 'dest' ) {
+                    obj[ 'css-dir="' + opts[ el ] + '"' ] = true;
+                }
+                delete opts[ el ];
+
+            }
+        });
+        _.extend( opts, obj );
+
+        return opts;
     };
 
     // Output to the console
