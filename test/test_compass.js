@@ -27,7 +27,7 @@ exports.compass = {
 
         // setup here
         done();
-    }/*,
+    },
     dirs: function( test ) {
         'use strict';
 
@@ -41,12 +41,10 @@ exports.compass = {
             dest: 'css'
         };
 
-        test.equal( compass.optsToArgs( dataSet ),
-            ['--sass-dir="sass"', '--css-dir="css"'],
-            'should return the correct command.' );
+        test.strictEqual( compass.optsToArgs( dataSet ), ['--sass-dir="sass"', '--css-dir="css"'], 'Should return the right arguments for the cli.' );
 
         test.done();
-    }*/
+    }
     /*specify: function( test ) {
         'use strict';
 
