@@ -1,6 +1,5 @@
 module.exports = function( grunt ) {
     'use strict';
-
     // Internal lib.
     var compass = require( './lib/compass' ).init( grunt );
 
